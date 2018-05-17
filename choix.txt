@@ -1,0 +1,6 @@
+Groupe n°7 
+
+Choix 1 : On ne reconnait pas les float ni les strings pour l'instant
+Choix 2 : Pouvoir déclarer une variable et lui affecter une valeur dans la même ligne
+Choix 3 : On force les accolades ouvrantes et fermantes pour les IF
+Choix 4 : Pour les if, on ne gère pas le "NOT" (!)

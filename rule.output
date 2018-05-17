@@ -1,0 +1,1646 @@
+Terminaux inutilisés dans la grammaire
+
+   tCONST
+   tTYPE
+   tCARACTERE
+   tNULL
+   tGUILLEMET
+   tPOINT_EXCLAM
+
+
+Grammaire
+
+    0 $accept: start $end
+
+    1 start: fonctions
+
+    2 fonctions: fonction fonctions
+    3          | %empty
+
+    4 fonction: type tNOM tPARENTHESE_OUVRANTE args tPARENTHESE_FERMANTE body
+
+    5 type: tVOID
+    6     | tINT
+    7     | tCHAR
+
+    8 args: arg args_suite
+    9     | %empty
+
+   10 args_suite: tVIRGULE arg args_suite
+   11           | %empty
+
+   12 arg: type tNOM
+
+   13 body: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE
+
+   14 instrs: instr instrs
+   15       | %empty
+
+   16 instr: appel_fonction
+   17      | declaration_variables
+   18      | calcul
+   19      | printf
+   20      | bloc_if
+   21      | bloc_while
+
+   22 bloc_while_action: %empty
+
+   23 memo_instr: %empty
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE bloc_while_action body_while
+
+   25 body_while: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE
+   26           | instr tFIN_INSTRUCTION
+
+   27 bloc_if_action: %empty
+
+   28 bloc_else_action: %empty
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if
+
+   30 $@1: %empty
+
+   31 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 body_if
+
+   32 body_if: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE
+   33        | instr tFIN_INSTRUCTION
+
+   34 appel_fonction: tNOM tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+   35 printf: tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+   36 $@2: %empty
+
+   37 decl: type tNOM $@2 decl_affect
+
+   38 decl_affect: %empty
+   39            | tEGAL valeur_ar
+
+   40 declaration_variables: decl declaration_variables_suite tFIN_INSTRUCTION
+
+   41 $@3: %empty
+
+   42 declaration_variables_suite: tVIRGULE tNOM $@3 declaration_variables_suite
+   43                            | %empty
+
+   44 valeurs: operation valeurs_suite
+   45        | %empty
+
+   46 valeurs_suite: tVIRGULE operation valeurs_suite
+   47              | %empty
+
+   48 valeur_ar: tNOM
+   49          | tNOMBRE
+   50          | appel_fonction
+
+   51 operation: operation tPLUS operation
+   52          | operation tMOINS operation
+   53          | operation tFOIS operation
+   54          | operation tDIVISE operation
+   55          | operation tDOUBLE_EGAL operation
+   56          | operation tDIFFERENT operation
+   57          | operation tINFERIEUR operation
+   58          | operation tINFERIEUR_EGAL operation
+   59          | operation tSUPERIEUR operation
+   60          | operation tSUPERIEUR_EGAL operation
+   61          | tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE
+   62          | valeur_ar
+
+   63 calcul: tNOM tEGAL operation tFIN_INSTRUCTION
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+error (256)
+tVIRGULE (258) 10 42 46
+tFIN_INSTRUCTION (259) 26 33 34 35 40 63
+tPRINTF (260) 35
+tACCOLADE_OUVRANTE (261) 13 25 32
+tACCOLADE_FERMANTE (262) 13 25 32
+tPLUS (263) 51
+tMOINS (264) 52
+tFOIS (265) 53
+tDIVISE (266) 54
+tEGAL (267) 39 63
+tPARENTHESE_OUVRANTE (268) 4 24 29 31 34 35 61
+tPARENTHESE_FERMANTE (269) 4 24 29 31 34 35 61
+tCONST (270)
+tNOM (271) 4 12 34 37 42 48 63
+tNOMBRE (272) 49
+tTYPE (273)
+tINT (274) 6
+tCHAR (275) 7
+tVOID (276) 5
+tCARACTERE (277)
+tNULL (278)
+tWHILE (279) 24
+tGUILLEMET (280)
+tIF (281) 29 31
+tELSE (282) 31
+tDOUBLE_EGAL (283) 55
+tDIFFERENT (284) 56
+tINFERIEUR (285) 57
+tINFERIEUR_EGAL (286) 58
+tSUPERIEUR (287) 59
+tSUPERIEUR_EGAL (288) 60
+tPOINT_EXCLAM (289)
+tTRUC (290)
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (36)
+    à gauche: 0
+start (37)
+    à gauche: 1, à droite: 0
+fonctions (38)
+    à gauche: 2 3, à droite: 1 2
+fonction (39)
+    à gauche: 4, à droite: 2
+type (40)
+    à gauche: 5 6 7, à droite: 4 12 37
+args (41)
+    à gauche: 8 9, à droite: 4
+args_suite (42)
+    à gauche: 10 11, à droite: 8 10
+arg (43)
+    à gauche: 12, à droite: 8 10
+body (44)
+    à gauche: 13, à droite: 4
+instrs (45)
+    à gauche: 14 15, à droite: 13 14 25 32
+instr (46)
+    à gauche: 16 17 18 19 20 21, à droite: 14 26 33
+bloc_while_action (47)
+    à gauche: 22, à droite: 24
+memo_instr (48)
+    à gauche: 23, à droite: 24
+bloc_while (49)
+    à gauche: 24, à droite: 21
+body_while (50)
+    à gauche: 25 26, à droite: 24
+bloc_if_action (51)
+    à gauche: 27, à droite: 29 31
+bloc_else_action (52)
+    à gauche: 28, à droite: 31
+bloc_if (53)
+    à gauche: 29 31, à droite: 20
+$@1 (54)
+    à gauche: 30, à droite: 31
+body_if (55)
+    à gauche: 32 33, à droite: 29 31
+appel_fonction (56)
+    à gauche: 34, à droite: 16 50
+printf (57)
+    à gauche: 35, à droite: 19
+decl (58)
+    à gauche: 37, à droite: 40
+$@2 (59)
+    à gauche: 36, à droite: 37
+decl_affect (60)
+    à gauche: 38 39, à droite: 37
+declaration_variables (61)
+    à gauche: 40, à droite: 17
+declaration_variables_suite (62)
+    à gauche: 42 43, à droite: 40 42
+$@3 (63)
+    à gauche: 41, à droite: 42
+valeurs (64)
+    à gauche: 44 45, à droite: 34
+valeurs_suite (65)
+    à gauche: 46 47, à droite: 44 46
+valeur_ar (66)
+    à gauche: 48 49 50, à droite: 39 62
+operation (67)
+    à gauche: 51 52 53 54 55 56 57 58 59 60 61 62, à droite: 24 29
+    31 35 44 46 51 52 53 54 55 56 57 58 59 60 61 63
+calcul (68)
+    à gauche: 63, à droite: 18
+
+
+État 0
+
+    0 $accept: . start $end
+
+    tINT   décalage et aller à l'état 1
+    tCHAR  décalage et aller à l'état 2
+    tVOID  décalage et aller à l'état 3
+
+    $défaut  réduction par utilisation de la règle 3 (fonctions)
+
+    start      aller à l'état 4
+    fonctions  aller à l'état 5
+    fonction   aller à l'état 6
+    type       aller à l'état 7
+
+
+État 1
+
+    6 type: tINT .
+
+    $défaut  réduction par utilisation de la règle 6 (type)
+
+
+État 2
+
+    7 type: tCHAR .
+
+    $défaut  réduction par utilisation de la règle 7 (type)
+
+
+État 3
+
+    5 type: tVOID .
+
+    $défaut  réduction par utilisation de la règle 5 (type)
+
+
+État 4
+
+    0 $accept: start . $end
+
+    $end  décalage et aller à l'état 8
+
+
+État 5
+
+    1 start: fonctions .
+
+    $défaut  réduction par utilisation de la règle 1 (start)
+
+
+État 6
+
+    2 fonctions: fonction . fonctions
+
+    tINT   décalage et aller à l'état 1
+    tCHAR  décalage et aller à l'état 2
+    tVOID  décalage et aller à l'état 3
+
+    $défaut  réduction par utilisation de la règle 3 (fonctions)
+
+    fonctions  aller à l'état 9
+    fonction   aller à l'état 6
+    type       aller à l'état 7
+
+
+État 7
+
+    4 fonction: type . tNOM tPARENTHESE_OUVRANTE args tPARENTHESE_FERMANTE body
+
+    tNOM  décalage et aller à l'état 10
+
+
+État 8
+
+    0 $accept: start $end .
+
+    $défaut  accepter
+
+
+État 9
+
+    2 fonctions: fonction fonctions .
+
+    $défaut  réduction par utilisation de la règle 2 (fonctions)
+
+
+État 10
+
+    4 fonction: type tNOM . tPARENTHESE_OUVRANTE args tPARENTHESE_FERMANTE body
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 11
+
+
+État 11
+
+    4 fonction: type tNOM tPARENTHESE_OUVRANTE . args tPARENTHESE_FERMANTE body
+
+    tINT   décalage et aller à l'état 1
+    tCHAR  décalage et aller à l'état 2
+    tVOID  décalage et aller à l'état 3
+
+    $défaut  réduction par utilisation de la règle 9 (args)
+
+    type  aller à l'état 12
+    args  aller à l'état 13
+    arg   aller à l'état 14
+
+
+État 12
+
+   12 arg: type . tNOM
+
+    tNOM  décalage et aller à l'état 15
+
+
+État 13
+
+    4 fonction: type tNOM tPARENTHESE_OUVRANTE args . tPARENTHESE_FERMANTE body
+
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 16
+
+
+État 14
+
+    8 args: arg . args_suite
+
+    tVIRGULE  décalage et aller à l'état 17
+
+    $défaut  réduction par utilisation de la règle 11 (args_suite)
+
+    args_suite  aller à l'état 18
+
+
+État 15
+
+   12 arg: type tNOM .
+
+    $défaut  réduction par utilisation de la règle 12 (arg)
+
+
+État 16
+
+    4 fonction: type tNOM tPARENTHESE_OUVRANTE args tPARENTHESE_FERMANTE . body
+
+    tACCOLADE_OUVRANTE  décalage et aller à l'état 19
+
+    body  aller à l'état 20
+
+
+État 17
+
+   10 args_suite: tVIRGULE . arg args_suite
+
+    tINT   décalage et aller à l'état 1
+    tCHAR  décalage et aller à l'état 2
+    tVOID  décalage et aller à l'état 3
+
+    type  aller à l'état 12
+    arg   aller à l'état 21
+
+
+État 18
+
+    8 args: arg args_suite .
+
+    $défaut  réduction par utilisation de la règle 8 (args)
+
+
+État 19
+
+   13 body: tACCOLADE_OUVRANTE . instrs tACCOLADE_FERMANTE
+
+    tPRINTF  décalage et aller à l'état 22
+    tNOM     décalage et aller à l'état 23
+    tINT     décalage et aller à l'état 1
+    tCHAR    décalage et aller à l'état 2
+    tVOID    décalage et aller à l'état 3
+    tWHILE   décalage et aller à l'état 24
+    tIF      décalage et aller à l'état 25
+
+    $défaut  réduction par utilisation de la règle 15 (instrs)
+
+    type                   aller à l'état 26
+    instrs                 aller à l'état 27
+    instr                  aller à l'état 28
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 20
+
+    4 fonction: type tNOM tPARENTHESE_OUVRANTE args tPARENTHESE_FERMANTE body .
+
+    $défaut  réduction par utilisation de la règle 4 (fonction)
+
+
+État 21
+
+   10 args_suite: tVIRGULE arg . args_suite
+
+    tVIRGULE  décalage et aller à l'état 17
+
+    $défaut  réduction par utilisation de la règle 11 (args_suite)
+
+    args_suite  aller à l'état 36
+
+
+État 22
+
+   35 printf: tPRINTF . tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 37
+
+
+État 23
+
+   34 appel_fonction: tNOM . tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+   63 calcul: tNOM . tEGAL operation tFIN_INSTRUCTION
+
+    tEGAL                 décalage et aller à l'état 38
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 39
+
+
+État 24
+
+   24 bloc_while: tWHILE . tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE bloc_while_action body_while
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 40
+
+
+État 25
+
+   29 bloc_if: tIF . tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if
+   31        | tIF . tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 body_if
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 41
+
+
+État 26
+
+   37 decl: type . tNOM $@2 decl_affect
+
+    tNOM  décalage et aller à l'état 42
+
+
+État 27
+
+   13 body: tACCOLADE_OUVRANTE instrs . tACCOLADE_FERMANTE
+
+    tACCOLADE_FERMANTE  décalage et aller à l'état 43
+
+
+État 28
+
+   14 instrs: instr . instrs
+
+    tPRINTF  décalage et aller à l'état 22
+    tNOM     décalage et aller à l'état 23
+    tINT     décalage et aller à l'état 1
+    tCHAR    décalage et aller à l'état 2
+    tVOID    décalage et aller à l'état 3
+    tWHILE   décalage et aller à l'état 24
+    tIF      décalage et aller à l'état 25
+
+    $défaut  réduction par utilisation de la règle 15 (instrs)
+
+    type                   aller à l'état 26
+    instrs                 aller à l'état 44
+    instr                  aller à l'état 28
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 29
+
+   21 instr: bloc_while .
+
+    $défaut  réduction par utilisation de la règle 21 (instr)
+
+
+État 30
+
+   20 instr: bloc_if .
+
+    $défaut  réduction par utilisation de la règle 20 (instr)
+
+
+État 31
+
+   16 instr: appel_fonction .
+
+    $défaut  réduction par utilisation de la règle 16 (instr)
+
+
+État 32
+
+   19 instr: printf .
+
+    $défaut  réduction par utilisation de la règle 19 (instr)
+
+
+État 33
+
+   40 declaration_variables: decl . declaration_variables_suite tFIN_INSTRUCTION
+
+    tVIRGULE  décalage et aller à l'état 45
+
+    $défaut  réduction par utilisation de la règle 43 (declaration_variables_suite)
+
+    declaration_variables_suite  aller à l'état 46
+
+
+État 34
+
+   17 instr: declaration_variables .
+
+    $défaut  réduction par utilisation de la règle 17 (instr)
+
+
+État 35
+
+   18 instr: calcul .
+
+    $défaut  réduction par utilisation de la règle 18 (instr)
+
+
+État 36
+
+   10 args_suite: tVIRGULE arg args_suite .
+
+    $défaut  réduction par utilisation de la règle 10 (args_suite)
+
+
+État 37
+
+   35 printf: tPRINTF tPARENTHESE_OUVRANTE . operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 52
+
+
+État 38
+
+   63 calcul: tNOM tEGAL . operation tFIN_INSTRUCTION
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 53
+
+
+État 39
+
+   34 appel_fonction: tNOM tPARENTHESE_OUVRANTE . valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    $défaut  réduction par utilisation de la règle 45 (valeurs)
+
+    appel_fonction  aller à l'état 50
+    valeurs         aller à l'état 54
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 55
+
+
+État 40
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE . memo_instr operation tPARENTHESE_FERMANTE bloc_while_action body_while
+
+    $défaut  réduction par utilisation de la règle 23 (memo_instr)
+
+    memo_instr  aller à l'état 56
+
+
+État 41
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE . operation tPARENTHESE_FERMANTE bloc_if_action body_if
+   31        | tIF tPARENTHESE_OUVRANTE . operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 body_if
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 57
+
+
+État 42
+
+   37 decl: type tNOM . $@2 decl_affect
+
+    $défaut  réduction par utilisation de la règle 36 ($@2)
+
+    $@2  aller à l'état 58
+
+
+État 43
+
+   13 body: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 13 (body)
+
+
+État 44
+
+   14 instrs: instr instrs .
+
+    $défaut  réduction par utilisation de la règle 14 (instrs)
+
+
+État 45
+
+   42 declaration_variables_suite: tVIRGULE . tNOM $@3 declaration_variables_suite
+
+    tNOM  décalage et aller à l'état 59
+
+
+État 46
+
+   40 declaration_variables: decl declaration_variables_suite . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 60
+
+
+État 47
+
+   61 operation: tPARENTHESE_OUVRANTE . operation tPARENTHESE_FERMANTE
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 61
+
+
+État 48
+
+   34 appel_fonction: tNOM . tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+   48 valeur_ar: tNOM .
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 39
+
+    $défaut  réduction par utilisation de la règle 48 (valeur_ar)
+
+
+État 49
+
+   49 valeur_ar: tNOMBRE .
+
+    $défaut  réduction par utilisation de la règle 49 (valeur_ar)
+
+
+État 50
+
+   50 valeur_ar: appel_fonction .
+
+    $défaut  réduction par utilisation de la règle 50 (valeur_ar)
+
+
+État 51
+
+   62 operation: valeur_ar .
+
+    $défaut  réduction par utilisation de la règle 62 (operation)
+
+
+État 52
+
+   35 printf: tPRINTF tPARENTHESE_OUVRANTE operation . tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS                 décalage et aller à l'état 62
+    tMOINS                décalage et aller à l'état 63
+    tFOIS                 décalage et aller à l'état 64
+    tDIVISE               décalage et aller à l'état 65
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 66
+    tDOUBLE_EGAL          décalage et aller à l'état 67
+    tDIFFERENT            décalage et aller à l'état 68
+    tINFERIEUR            décalage et aller à l'état 69
+    tINFERIEUR_EGAL       décalage et aller à l'état 70
+    tSUPERIEUR            décalage et aller à l'état 71
+    tSUPERIEUR_EGAL       décalage et aller à l'état 72
+
+
+État 53
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+   63 calcul: tNOM tEGAL operation . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 73
+    tPLUS             décalage et aller à l'état 62
+    tMOINS            décalage et aller à l'état 63
+    tFOIS             décalage et aller à l'état 64
+    tDIVISE           décalage et aller à l'état 65
+    tDOUBLE_EGAL      décalage et aller à l'état 67
+    tDIFFERENT        décalage et aller à l'état 68
+    tINFERIEUR        décalage et aller à l'état 69
+    tINFERIEUR_EGAL   décalage et aller à l'état 70
+    tSUPERIEUR        décalage et aller à l'état 71
+    tSUPERIEUR_EGAL   décalage et aller à l'état 72
+
+
+État 54
+
+   34 appel_fonction: tNOM tPARENTHESE_OUVRANTE valeurs . tPARENTHESE_FERMANTE tFIN_INSTRUCTION
+
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 74
+
+
+État 55
+
+   44 valeurs: operation . valeurs_suite
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tVIRGULE         décalage et aller à l'état 75
+    tPLUS            décalage et aller à l'état 62
+    tMOINS           décalage et aller à l'état 63
+    tFOIS            décalage et aller à l'état 64
+    tDIVISE          décalage et aller à l'état 65
+    tDOUBLE_EGAL     décalage et aller à l'état 67
+    tDIFFERENT       décalage et aller à l'état 68
+    tINFERIEUR       décalage et aller à l'état 69
+    tINFERIEUR_EGAL  décalage et aller à l'état 70
+    tSUPERIEUR       décalage et aller à l'état 71
+    tSUPERIEUR_EGAL  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 47 (valeurs_suite)
+
+    valeurs_suite  aller à l'état 76
+
+
+État 56
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr . operation tPARENTHESE_FERMANTE bloc_while_action body_while
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 77
+
+
+État 57
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE operation . tPARENTHESE_FERMANTE bloc_if_action body_if
+   31        | tIF tPARENTHESE_OUVRANTE operation . tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 body_if
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS                 décalage et aller à l'état 62
+    tMOINS                décalage et aller à l'état 63
+    tFOIS                 décalage et aller à l'état 64
+    tDIVISE               décalage et aller à l'état 65
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 78
+    tDOUBLE_EGAL          décalage et aller à l'état 67
+    tDIFFERENT            décalage et aller à l'état 68
+    tINFERIEUR            décalage et aller à l'état 69
+    tINFERIEUR_EGAL       décalage et aller à l'état 70
+    tSUPERIEUR            décalage et aller à l'état 71
+    tSUPERIEUR_EGAL       décalage et aller à l'état 72
+
+
+État 58
+
+   37 decl: type tNOM $@2 . decl_affect
+
+    tEGAL  décalage et aller à l'état 79
+
+    $défaut  réduction par utilisation de la règle 38 (decl_affect)
+
+    decl_affect  aller à l'état 80
+
+
+État 59
+
+   42 declaration_variables_suite: tVIRGULE tNOM . $@3 declaration_variables_suite
+
+    $défaut  réduction par utilisation de la règle 41 ($@3)
+
+    $@3  aller à l'état 81
+
+
+État 60
+
+   40 declaration_variables: decl declaration_variables_suite tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 40 (declaration_variables)
+
+
+État 61
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+   61          | tPARENTHESE_OUVRANTE operation . tPARENTHESE_FERMANTE
+
+    tPLUS                 décalage et aller à l'état 62
+    tMOINS                décalage et aller à l'état 63
+    tFOIS                 décalage et aller à l'état 64
+    tDIVISE               décalage et aller à l'état 65
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 82
+    tDOUBLE_EGAL          décalage et aller à l'état 67
+    tDIFFERENT            décalage et aller à l'état 68
+    tINFERIEUR            décalage et aller à l'état 69
+    tINFERIEUR_EGAL       décalage et aller à l'état 70
+    tSUPERIEUR            décalage et aller à l'état 71
+    tSUPERIEUR_EGAL       décalage et aller à l'état 72
+
+
+État 62
+
+   51 operation: operation tPLUS . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 83
+
+
+État 63
+
+   52 operation: operation tMOINS . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 84
+
+
+État 64
+
+   53 operation: operation tFOIS . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 85
+
+
+État 65
+
+   54 operation: operation tDIVISE . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 86
+
+
+État 66
+
+   35 printf: tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 87
+
+
+État 67
+
+   55 operation: operation tDOUBLE_EGAL . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 88
+
+
+État 68
+
+   56 operation: operation tDIFFERENT . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 89
+
+
+État 69
+
+   57 operation: operation tINFERIEUR . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 90
+
+
+État 70
+
+   58 operation: operation tINFERIEUR_EGAL . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 91
+
+
+État 71
+
+   59 operation: operation tSUPERIEUR . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 92
+
+
+État 72
+
+   60 operation: operation tSUPERIEUR_EGAL . operation
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 93
+
+
+État 73
+
+   63 calcul: tNOM tEGAL operation tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 63 (calcul)
+
+
+État 74
+
+   34 appel_fonction: tNOM tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 94
+
+
+État 75
+
+   46 valeurs_suite: tVIRGULE . operation valeurs_suite
+
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 95
+
+
+État 76
+
+   44 valeurs: operation valeurs_suite .
+
+    $défaut  réduction par utilisation de la règle 44 (valeurs)
+
+
+État 77
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr operation . tPARENTHESE_FERMANTE bloc_while_action body_while
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS                 décalage et aller à l'état 62
+    tMOINS                décalage et aller à l'état 63
+    tFOIS                 décalage et aller à l'état 64
+    tDIVISE               décalage et aller à l'état 65
+    tPARENTHESE_FERMANTE  décalage et aller à l'état 96
+    tDOUBLE_EGAL          décalage et aller à l'état 67
+    tDIFFERENT            décalage et aller à l'état 68
+    tINFERIEUR            décalage et aller à l'état 69
+    tINFERIEUR_EGAL       décalage et aller à l'état 70
+    tSUPERIEUR            décalage et aller à l'état 71
+    tSUPERIEUR_EGAL       décalage et aller à l'état 72
+
+
+État 78
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE . bloc_if_action body_if
+   31        | tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE . bloc_if_action body_if bloc_else_action tELSE $@1 body_if
+
+    $défaut  réduction par utilisation de la règle 27 (bloc_if_action)
+
+    bloc_if_action  aller à l'état 97
+
+
+État 79
+
+   39 decl_affect: tEGAL . valeur_ar
+
+    tNOM     décalage et aller à l'état 48
+    tNOMBRE  décalage et aller à l'état 49
+
+    appel_fonction  aller à l'état 50
+    valeur_ar       aller à l'état 98
+
+
+État 80
+
+   37 decl: type tNOM $@2 decl_affect .
+
+    $défaut  réduction par utilisation de la règle 37 (decl)
+
+
+État 81
+
+   42 declaration_variables_suite: tVIRGULE tNOM $@3 . declaration_variables_suite
+
+    tVIRGULE  décalage et aller à l'état 45
+
+    $défaut  réduction par utilisation de la règle 43 (declaration_variables_suite)
+
+    declaration_variables_suite  aller à l'état 99
+
+
+État 82
+
+   61 operation: tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 61 (operation)
+
+
+État 83
+
+   51 operation: operation . tPLUS operation
+   51          | operation tPLUS operation .
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 51 (operation)
+
+
+État 84
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   52          | operation tMOINS operation .
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 52 (operation)
+
+
+État 85
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   53          | operation tFOIS operation .
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    $défaut  réduction par utilisation de la règle 53 (operation)
+
+
+État 86
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   54          | operation tDIVISE operation .
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    $défaut  réduction par utilisation de la règle 54 (operation)
+
+
+État 87
+
+   35 printf: tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 35 (printf)
+
+
+État 88
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   55          | operation tDOUBLE_EGAL operation .
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 55 (operation)
+
+
+État 89
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   56          | operation tDIFFERENT operation .
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 56 (operation)
+
+
+État 90
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   57          | operation tINFERIEUR operation .
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 57 (operation)
+
+
+État 91
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   58          | operation tINFERIEUR_EGAL operation .
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 58 (operation)
+
+
+État 92
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   59          | operation tSUPERIEUR operation .
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 59 (operation)
+
+
+État 93
+
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+   60          | operation tSUPERIEUR_EGAL operation .
+
+    tPLUS    décalage et aller à l'état 62
+    tMOINS   décalage et aller à l'état 63
+    tFOIS    décalage et aller à l'état 64
+    tDIVISE  décalage et aller à l'état 65
+
+    $défaut  réduction par utilisation de la règle 60 (operation)
+
+
+État 94
+
+   34 appel_fonction: tNOM tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 34 (appel_fonction)
+
+
+État 95
+
+   46 valeurs_suite: tVIRGULE operation . valeurs_suite
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tVIRGULE         décalage et aller à l'état 75
+    tPLUS            décalage et aller à l'état 62
+    tMOINS           décalage et aller à l'état 63
+    tFOIS            décalage et aller à l'état 64
+    tDIVISE          décalage et aller à l'état 65
+    tDOUBLE_EGAL     décalage et aller à l'état 67
+    tDIFFERENT       décalage et aller à l'état 68
+    tINFERIEUR       décalage et aller à l'état 69
+    tINFERIEUR_EGAL  décalage et aller à l'état 70
+    tSUPERIEUR       décalage et aller à l'état 71
+    tSUPERIEUR_EGAL  décalage et aller à l'état 72
+
+    $défaut  réduction par utilisation de la règle 47 (valeurs_suite)
+
+    valeurs_suite  aller à l'état 100
+
+
+État 96
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE . bloc_while_action body_while
+
+    $défaut  réduction par utilisation de la règle 22 (bloc_while_action)
+
+    bloc_while_action  aller à l'état 101
+
+
+État 97
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action . body_if
+   31        | tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action . body_if bloc_else_action tELSE $@1 body_if
+
+    tPRINTF             décalage et aller à l'état 22
+    tACCOLADE_OUVRANTE  décalage et aller à l'état 102
+    tNOM                décalage et aller à l'état 23
+    tINT                décalage et aller à l'état 1
+    tCHAR               décalage et aller à l'état 2
+    tVOID               décalage et aller à l'état 3
+    tWHILE              décalage et aller à l'état 24
+    tIF                 décalage et aller à l'état 25
+
+    type                   aller à l'état 26
+    instr                  aller à l'état 103
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    body_if                aller à l'état 104
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 98
+
+   39 decl_affect: tEGAL valeur_ar .
+
+    $défaut  réduction par utilisation de la règle 39 (decl_affect)
+
+
+État 99
+
+   42 declaration_variables_suite: tVIRGULE tNOM $@3 declaration_variables_suite .
+
+    $défaut  réduction par utilisation de la règle 42 (declaration_variables_suite)
+
+
+État 100
+
+   46 valeurs_suite: tVIRGULE operation valeurs_suite .
+
+    $défaut  réduction par utilisation de la règle 46 (valeurs_suite)
+
+
+État 101
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE bloc_while_action . body_while
+
+    tPRINTF             décalage et aller à l'état 22
+    tACCOLADE_OUVRANTE  décalage et aller à l'état 105
+    tNOM                décalage et aller à l'état 23
+    tINT                décalage et aller à l'état 1
+    tCHAR               décalage et aller à l'état 2
+    tVOID               décalage et aller à l'état 3
+    tWHILE              décalage et aller à l'état 24
+    tIF                 décalage et aller à l'état 25
+
+    type                   aller à l'état 26
+    instr                  aller à l'état 106
+    bloc_while             aller à l'état 29
+    body_while             aller à l'état 107
+    bloc_if                aller à l'état 30
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 102
+
+   32 body_if: tACCOLADE_OUVRANTE . instrs tACCOLADE_FERMANTE
+
+    tPRINTF  décalage et aller à l'état 22
+    tNOM     décalage et aller à l'état 23
+    tINT     décalage et aller à l'état 1
+    tCHAR    décalage et aller à l'état 2
+    tVOID    décalage et aller à l'état 3
+    tWHILE   décalage et aller à l'état 24
+    tIF      décalage et aller à l'état 25
+
+    $défaut  réduction par utilisation de la règle 15 (instrs)
+
+    type                   aller à l'état 26
+    instrs                 aller à l'état 108
+    instr                  aller à l'état 28
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 103
+
+   33 body_if: instr . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 109
+
+
+État 104
+
+   29 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if .
+   31        | tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if . bloc_else_action tELSE $@1 body_if
+
+    tELSE     réduction par utilisation de la règle 28 (bloc_else_action)
+    $défaut  réduction par utilisation de la règle 29 (bloc_if)
+
+    bloc_else_action  aller à l'état 110
+
+
+État 105
+
+   25 body_while: tACCOLADE_OUVRANTE . instrs tACCOLADE_FERMANTE
+
+    tPRINTF  décalage et aller à l'état 22
+    tNOM     décalage et aller à l'état 23
+    tINT     décalage et aller à l'état 1
+    tCHAR    décalage et aller à l'état 2
+    tVOID    décalage et aller à l'état 3
+    tWHILE   décalage et aller à l'état 24
+    tIF      décalage et aller à l'état 25
+
+    $défaut  réduction par utilisation de la règle 15 (instrs)
+
+    type                   aller à l'état 26
+    instrs                 aller à l'état 111
+    instr                  aller à l'état 28
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 106
+
+   26 body_while: instr . tFIN_INSTRUCTION
+
+    tFIN_INSTRUCTION  décalage et aller à l'état 112
+
+
+État 107
+
+   24 bloc_while: tWHILE tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE bloc_while_action body_while .
+
+    $défaut  réduction par utilisation de la règle 24 (bloc_while)
+
+
+État 108
+
+   32 body_if: tACCOLADE_OUVRANTE instrs . tACCOLADE_FERMANTE
+
+    tACCOLADE_FERMANTE  décalage et aller à l'état 113
+
+
+État 109
+
+   33 body_if: instr tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 33 (body_if)
+
+
+État 110
+
+   31 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action . tELSE $@1 body_if
+
+    tELSE  décalage et aller à l'état 114
+
+
+État 111
+
+   25 body_while: tACCOLADE_OUVRANTE instrs . tACCOLADE_FERMANTE
+
+    tACCOLADE_FERMANTE  décalage et aller à l'état 115
+
+
+État 112
+
+   26 body_while: instr tFIN_INSTRUCTION .
+
+    $défaut  réduction par utilisation de la règle 26 (body_while)
+
+
+État 113
+
+   32 body_if: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 32 (body_if)
+
+
+État 114
+
+   31 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE . $@1 body_if
+
+    $défaut  réduction par utilisation de la règle 30 ($@1)
+
+    $@1  aller à l'état 116
+
+
+État 115
+
+   25 body_while: tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE .
+
+    $défaut  réduction par utilisation de la règle 25 (body_while)
+
+
+État 116
+
+   31 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 . body_if
+
+    tPRINTF             décalage et aller à l'état 22
+    tACCOLADE_OUVRANTE  décalage et aller à l'état 102
+    tNOM                décalage et aller à l'état 23
+    tINT                décalage et aller à l'état 1
+    tCHAR               décalage et aller à l'état 2
+    tVOID               décalage et aller à l'état 3
+    tWHILE              décalage et aller à l'état 24
+    tIF                 décalage et aller à l'état 25
+
+    type                   aller à l'état 26
+    instr                  aller à l'état 103
+    bloc_while             aller à l'état 29
+    bloc_if                aller à l'état 30
+    body_if                aller à l'état 117
+    appel_fonction         aller à l'état 31
+    printf                 aller à l'état 32
+    decl                   aller à l'état 33
+    declaration_variables  aller à l'état 34
+    calcul                 aller à l'état 35
+
+
+État 117
+
+   31 bloc_if: tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if bloc_else_action tELSE $@1 body_if .
+
+    $défaut  réduction par utilisation de la règle 31 (bloc_if)
