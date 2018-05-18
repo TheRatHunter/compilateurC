@@ -11,7 +11,6 @@ int nbInstructions;
 int reg[16];
 int memoireDonnees[1024];
 int ip = 0;
-
 struct instruction * tabInstr;
 
 void initInstrs() {
@@ -22,12 +21,15 @@ void interpreter() {
 	printf("Interprétation du code ASM...\n");
 	while (ip < nbInstructions){
 
-		if (strcmp(tabInstr[ip].instr,"jmp") ) {
-				ip = tabInstr[ip].arg1 ;
-		} else if (strcmp(tabInstr[ip].instr,"add")) {
+		if (!strcmp(tabInstr[ip].instr,"jmp") ) {
+			//printf("jmp détecté, ip=%d, arg1=%d, arg2=%d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			ip = tabInstr[ip].arg1 ;
+		} else if (!strcmp(tabInstr[ip].instr,"add")) {
+			//printf("add détecté\n");
 			reg[tabInstr[ip].arg1] += reg[tabInstr[ip].arg2];
 			ip++;
 		} else {
+			//printf("else\n");
 			ip++;
 		}
 
