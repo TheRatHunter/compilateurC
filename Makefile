@@ -4,7 +4,7 @@ lex.yy.c:compiler.l
 rule.tab.c: rule.y
 	bison -d -v rule.y
 compiler: lex.yy.c rule.tab.c table_symboles.c table_instructions.c
-	gcc -g -o compiler lex.yy.c rule.tab.c table_symboles.c table_instructions.c libfl.a ./bison-3.0.4/bison-3.0.4/lib/liby.a
+	gcc -g -o compiler lex.yy.c rule.tab.c table_symboles.c table_instructions.c libfl.a ./bison-3.0.4/lib/liby.a
 	#Version INSA :
 	#gcc -g -o compiler lex.yy.c rule.tab.c table_symboles.c table_instructions.c libfl.a ~/Programmes/bison-3.0.4/lib/liby.a
 test: compiler
@@ -17,4 +17,10 @@ testI: interpreter
 	./interpreteur output.asm
 tests: compiler interpreter
 	./compiler<test.c
+	./interpreteur output.asm
+tests2: compiler interpreter
+	./compiler<test2.c
+	./interpreteur output.asm
+tests3: compiler interpreter
+	./compiler<testPerso.c
 	./interpreteur output.asm

@@ -475,10 +475,10 @@ static const yytype_uint16 yyrline[] =
        0,    62,    62,    65,    66,    70,    73,    73,    73,    75,
       76,    79,    80,    83,    86,    90,    91,    95,    96,    97,
       98,    99,   100,   107,   115,   120,   123,   124,   131,   141,
-     144,   147,   146,   152,   153,   161,   164,   166,   166,   168,
-     168,   171,   173,   173,   174,   176,   177,   180,   181,   184,
-     188,   192,   199,   206,   213,   220,   227,   234,   241,   248,
-     255,   262,   269,   270,   272
+     144,   147,   146,   152,   153,   161,   163,   165,   165,   167,
+     167,   170,   172,   172,   173,   175,   176,   179,   180,   183,
+     187,   191,   198,   205,   212,   219,   226,   233,   240,   247,
+     254,   261,   268,   269,   271
 };
 #endif
 
@@ -1423,31 +1423,31 @@ yyreduce:
     break;
 
   case 36:
-#line 164 "rule.y" /* yacc.c:1646  */
-    { decrementerIndice(); }
+#line 163 "rule.y" /* yacc.c:1646  */
+    { addInstr("print", getIndice()-1, 0); decrementerIndice(); }
 #line 1429 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 166 "rule.y" /* yacc.c:1646  */
+#line 165 "rule.y" /* yacc.c:1646  */
     {ajouter((yyvsp[0].str), type, 0, 1);}
 #line 1435 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 168 "rule.y" /* yacc.c:1646  */
+#line 167 "rule.y" /* yacc.c:1646  */
     { decrementerIndice(); }
 #line 1441 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 173 "rule.y" /* yacc.c:1646  */
+#line 172 "rule.y" /* yacc.c:1646  */
     {ajouter((yyvsp[0].str), type, 0, 1);}
 #line 1447 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 185 "rule.y" /* yacc.c:1646  */
+#line 184 "rule.y" /* yacc.c:1646  */
     {
 		  addInstr("load", 0,getAdresse((yyvsp[0].str)));
 		  addInstr("store", 0, ajouterTmp("int"));}
@@ -1455,7 +1455,7 @@ yyreduce:
     break;
 
   case 50:
-#line 189 "rule.y" /* yacc.c:1646  */
+#line 188 "rule.y" /* yacc.c:1646  */
     {
 		  addInstr("afc", 0, (yyvsp[0].nb));
 		  addInstr("store", 0, ajouterTmp("int"));}
@@ -1463,7 +1463,7 @@ yyreduce:
     break;
 
   case 52:
-#line 199 "rule.y" /* yacc.c:1646  */
+#line 198 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1475,7 +1475,7 @@ yyreduce:
     break;
 
   case 53:
-#line 206 "rule.y" /* yacc.c:1646  */
+#line 205 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1487,7 +1487,7 @@ yyreduce:
     break;
 
   case 54:
-#line 213 "rule.y" /* yacc.c:1646  */
+#line 212 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1499,7 +1499,7 @@ yyreduce:
     break;
 
   case 55:
-#line 220 "rule.y" /* yacc.c:1646  */
+#line 219 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1511,7 +1511,7 @@ yyreduce:
     break;
 
   case 56:
-#line 227 "rule.y" /* yacc.c:1646  */
+#line 226 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1523,7 +1523,7 @@ yyreduce:
     break;
 
   case 57:
-#line 234 "rule.y" /* yacc.c:1646  */
+#line 233 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1535,7 +1535,7 @@ yyreduce:
     break;
 
   case 58:
-#line 241 "rule.y" /* yacc.c:1646  */
+#line 240 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1547,7 +1547,7 @@ yyreduce:
     break;
 
   case 59:
-#line 248 "rule.y" /* yacc.c:1646  */
+#line 247 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1559,7 +1559,7 @@ yyreduce:
     break;
 
   case 60:
-#line 255 "rule.y" /* yacc.c:1646  */
+#line 254 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1571,7 +1571,7 @@ yyreduce:
     break;
 
   case 61:
-#line 262 "rule.y" /* yacc.c:1646  */
+#line 261 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1583,7 +1583,7 @@ yyreduce:
     break;
 
   case 64:
-#line 272 "rule.y" /* yacc.c:1646  */
+#line 271 "rule.y" /* yacc.c:1646  */
     {
 		int a = getAdresse((yyvsp[-3].str));
 		addInstr("load", 0, getIndice() - 1);
@@ -1821,7 +1821,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 278 "rule.y" /* yacc.c:1906  */
+#line 277 "rule.y" /* yacc.c:1906  */
 
 
 void yyerror(char *err) {

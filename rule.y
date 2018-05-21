@@ -160,8 +160,7 @@ body_if : tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE
 appel_fonction:
 	tNOM tPARENTHESE_OUVRANTE valeurs tPARENTHESE_FERMANTE tFIN_INSTRUCTION ;
 
-printf : /* tPRINTF tPARENTHESE_OUVRANTE tGUILLEMET tNOM tGUILLEMET tPARENTHESE_FERMANTE tFIN_INSTRUCTION
-		|*/ tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION { decrementerIndice(); } ;
+printf : tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRUCTION { addInstr("print", getIndice()-1, 0); decrementerIndice(); } ;
 
 decl: type tNOM {ajouter($2, type, 0, 1);} decl_affect ;
 
