@@ -1466,8 +1466,8 @@ yyreduce:
   case 52:
 #line 200 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("add", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1478,8 +1478,8 @@ yyreduce:
   case 53:
 #line 207 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("sub", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1490,8 +1490,8 @@ yyreduce:
   case 54:
 #line 214 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("mul", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1502,8 +1502,8 @@ yyreduce:
   case 55:
 #line 221 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("div", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1514,8 +1514,8 @@ yyreduce:
   case 56:
 #line 228 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("equ", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1526,8 +1526,8 @@ yyreduce:
   case 57:
 #line 235 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("nequ", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1538,8 +1538,8 @@ yyreduce:
   case 58:
 #line 242 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("inf", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1550,8 +1550,8 @@ yyreduce:
   case 59:
 #line 249 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("infe", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1562,8 +1562,8 @@ yyreduce:
   case 60:
 #line 256 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("sup", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
@@ -1574,8 +1574,8 @@ yyreduce:
   case 61:
 #line 263 "rule.y" /* yacc.c:1646  */
     {
-				addInstr("load", 0, getIndice()-1);
-				addInstr("load", 1, getIndice()-2);
+				addInstr("load", getIndice()-1, 1);
+				addInstr("load", getIndice()-2, 0);
 				addInstr("supe", 0, 1);
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
