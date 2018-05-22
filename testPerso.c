@@ -4,4 +4,6 @@ int main() {
 	printf(i);
 	i = 5+2;
 	printf(i);
+	i = i+4;
+	printf(i);
 }

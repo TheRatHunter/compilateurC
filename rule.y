@@ -184,7 +184,7 @@ valeurs_suite: tVIRGULE operation valeurs_suite
 valeur_ar: tNOM
 		  {
 		  addInstr("load", 0,getAdresse($1));
-		  addInstr("store", 0, ajouterTmp("int"));}
+		  addInstr("store",  ajouterTmp("int"), 0);}
 		| tNOMBRE 
 		  {
 		  addInstr("afc", 0, $1);

@@ -1450,7 +1450,7 @@ yyreduce:
 #line 185 "rule.y" /* yacc.c:1646  */
     {
 		  addInstr("load", 0,getAdresse((yyvsp[0].str)));
-		  addInstr("store", 0, ajouterTmp("int"));}
+		  addInstr("store",  ajouterTmp("int"), 0);}
 #line 1455 "rule.tab.c" /* yacc.c:1646  */
     break;
 
