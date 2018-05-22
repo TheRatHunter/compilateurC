@@ -33,16 +33,26 @@ void interpreter() {
 
 		if (!strcmp(tabInstr[ip].instr,"jmp") ) { //OK
 			printf("-> jmp   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On saute à l'instruction %d.\n", tabInstr[ip].arg1);
 			ip = tabInstr[ip].arg1 ;
+		} else if (!strcmp(tabInstr[ip].instr,"jmpc")) { //OK
+			printf("-> jmpc  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			if (reg[tabInstr[ip].arg2]==0) {
+				printf("On saute à l'adresse %d car le contenu du registre %d vaut 0.\n", 
+					tabInstr[ip].arg1, tabInstr[ip].arg2);
+				ip = tabInstr[ip].arg1 ;
+			} else {
+				printf("On ne saute pas à l'adresse %d car le contenu du registre %d est différent de 0.\n", 
+					tabInstr[ip].arg1, tabInstr[ip].arg2);
+				ip++;
+			}
 		} else if (!strcmp(tabInstr[ip].instr,"add")) { //OK
 			printf("-> add   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			reg[tabInstr[ip].arg1] += reg[tabInstr[ip].arg2];
-			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"sub")) { //OK
 			printf("-> sub   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			reg[tabInstr[ip].arg1] -= reg[tabInstr[ip].arg2];
-			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"mul")) { //OK
 			printf("-> mul   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
@@ -50,7 +60,7 @@ void interpreter() {
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"div")) {
 			printf("-> div   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
-			reg[tabInstr[ip].arg1] /= reg[tabInstr[ip].arg2];
+			if ( reg[tabInstr[ip].arg2] != 0 ) reg[tabInstr[ip].arg1] /= reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"cop") ) { //OK
 			printf("-> cop   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
