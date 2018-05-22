@@ -477,8 +477,8 @@ static const yytype_uint16 yyrline[] =
       98,    99,   100,   107,   115,   120,   123,   124,   131,   141,
      144,   147,   146,   152,   153,   161,   163,   166,   166,   168,
      168,   171,   173,   173,   174,   176,   177,   180,   181,   184,
-     188,   192,   199,   206,   213,   220,   227,   234,   241,   248,
-     255,   262,   269,   270,   272
+     188,   193,   200,   207,   214,   221,   228,   235,   242,   249,
+     256,   263,   270,   271,   273
 };
 #endif
 
@@ -1458,12 +1458,13 @@ yyreduce:
 #line 189 "rule.y" /* yacc.c:1646  */
     {
 		  addInstr("afc", 0, (yyvsp[0].nb));
-		  addInstr("store", 0, ajouterTmp("int"));}
-#line 1463 "rule.tab.c" /* yacc.c:1646  */
+		  addInstr("store", ajouterTmp("int"), 0);
+		  }
+#line 1464 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 199 "rule.y" /* yacc.c:1646  */
+#line 200 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1471,11 +1472,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1475 "rule.tab.c" /* yacc.c:1646  */
+#line 1476 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 206 "rule.y" /* yacc.c:1646  */
+#line 207 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1483,11 +1484,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1487 "rule.tab.c" /* yacc.c:1646  */
+#line 1488 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 213 "rule.y" /* yacc.c:1646  */
+#line 214 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1495,11 +1496,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1499 "rule.tab.c" /* yacc.c:1646  */
+#line 1500 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 220 "rule.y" /* yacc.c:1646  */
+#line 221 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1507,11 +1508,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1511 "rule.tab.c" /* yacc.c:1646  */
+#line 1512 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 227 "rule.y" /* yacc.c:1646  */
+#line 228 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1519,11 +1520,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1523 "rule.tab.c" /* yacc.c:1646  */
+#line 1524 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 234 "rule.y" /* yacc.c:1646  */
+#line 235 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1531,11 +1532,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1535 "rule.tab.c" /* yacc.c:1646  */
+#line 1536 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 241 "rule.y" /* yacc.c:1646  */
+#line 242 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1543,11 +1544,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1547 "rule.tab.c" /* yacc.c:1646  */
+#line 1548 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 248 "rule.y" /* yacc.c:1646  */
+#line 249 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1555,11 +1556,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1559 "rule.tab.c" /* yacc.c:1646  */
+#line 1560 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 255 "rule.y" /* yacc.c:1646  */
+#line 256 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1567,11 +1568,11 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1571 "rule.tab.c" /* yacc.c:1646  */
+#line 1572 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 262 "rule.y" /* yacc.c:1646  */
+#line 263 "rule.y" /* yacc.c:1646  */
     {
 				addInstr("load", 0, getIndice()-1);
 				addInstr("load", 1, getIndice()-2);
@@ -1579,21 +1580,21 @@ yyreduce:
 				addInstr("store", 0, getIndice()-2);
 				decrementerIndice();
 				}
-#line 1583 "rule.tab.c" /* yacc.c:1646  */
+#line 1584 "rule.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 272 "rule.y" /* yacc.c:1646  */
+#line 273 "rule.y" /* yacc.c:1646  */
     {
 		int a = getAdresse((yyvsp[-3].str));
 		addInstr("load", 0, getIndice() - 1);
 		addInstr("store", 0, a);
 		decrementerIndice(); }
-#line 1593 "rule.tab.c" /* yacc.c:1646  */
+#line 1594 "rule.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1597 "rule.tab.c" /* yacc.c:1646  */
+#line 1598 "rule.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1821,7 +1822,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 278 "rule.y" /* yacc.c:1906  */
+#line 279 "rule.y" /* yacc.c:1906  */
 
 
 void yyerror(char *err) {

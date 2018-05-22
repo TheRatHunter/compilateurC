@@ -188,7 +188,8 @@ valeur_ar: tNOM
 		| tNOMBRE 
 		  {
 		  addInstr("afc", 0, $1);
-		  addInstr("store", 0, ajouterTmp("int"));}
+		  addInstr("store", ajouterTmp("int"), 0);
+		  }
 		| appel_fonction ;
 /*
 valeur_nar: tCARACTERE

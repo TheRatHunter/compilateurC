@@ -153,7 +153,7 @@ void interpreter() {
 			reg[tabInstr[ip].arg1] = tabInstr[ip].arg2;
 			printf("On met dans le registre %d la valeur %d.\n",
 				tabInstr[ip].arg1, tabInstr[ip].arg2);
-			printRegistres();
+			//printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"store")) { //OK
 			printf("-> store détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
