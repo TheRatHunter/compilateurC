@@ -22,5 +22,6 @@ tests2: compiler interpreter
 	./compiler<test2.c
 	./interpreteur output.asm
 tests3: compiler interpreter
+	cat testPerso.c
 	./compiler<testPerso.c
 	./interpreteur output.asm
