@@ -32,64 +32,69 @@ void interpreter() {
 	while (ip < nbInstructions){
 
 		if (!strcmp(tabInstr[ip].instr,"jmp") ) {
-			printf("jmp   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> jmp   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip = tabInstr[ip].arg1 ;
 		} else if (!strcmp(tabInstr[ip].instr,"add")) {
-			printf("add   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> add   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			reg[tabInstr[ip].arg1] += reg[tabInstr[ip].arg2];
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"sub")) {
-			printf("sub   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> sub   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"mul")) {
-			printf("mul   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> mul   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"div")) {
-			printf("div   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> div   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"equ")) {
-			printf("equ   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> equ   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"nequ")) {
-			printf("nequ  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> nequ  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"inf")) {
-			printf("inf   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> inf   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"infe")) {
-			printf("infe  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> infe  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"sup")) {
-			printf("sup   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> sup   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"supe")) {
-			printf("supe  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> supe  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"afc")) {
-			printf("afc   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> afc   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			reg[tabInstr[ip].arg1] = tabInstr[ip].arg2;
 			printRegistres();
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"store")) {
-			printf("store détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
-			printRegistres();
+			printf("-> store détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			memoireDonnees[tabInstr[ip].arg1] = reg[tabInstr[ip].arg2];
+			printf("On a stocké dans la mémoire de données à l'adresse %d la valeur %d venant du registre %d.\n", 
+				tabInstr[ip].arg1, memoireDonnees[tabInstr[ip].arg1], tabInstr[ip].arg2);
 			ip++;
 		} else if ((!strcmp(tabInstr[ip].instr,"load"))) {
-			printf("load  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
-			printRegistres();
+			printf("-> load  détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			reg[tabInstr[ip].arg2] = memoireDonnees[tabInstr[ip].arg1];
+			printf("On a stocké dans le registre %d la valeur %d contenue dans la mémoire de données à l'adresse %d.\n", 
+				tabInstr[ip].arg2, memoireDonnees[tabInstr[ip].arg1], tabInstr[ip].arg1);
 			ip++;
 		} else if ((!strcmp(tabInstr[ip].instr,"print"))) {
-			printf("print détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("-> print détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			printf("%d\n", tabInstr[ip].arg1);
 			ip++;
