@@ -48,22 +48,32 @@ void interpreter() {
 			}
 		} else if (!strcmp(tabInstr[ip].instr,"add")) { //OK
 			printf("-> add   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On inscrit dans le registre %d la somme des valeurs contenues dans les registres %d et %d, soient %d et %d.\n"
+				,tabInstr[ip].arg1, tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			reg[tabInstr[ip].arg1] += reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"sub")) { //OK
 			printf("-> sub   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On inscrit dans le registre %d la soustraction des valeurs contenues dans les registres %d et %d, soient %d et %d.\n"
+				,tabInstr[ip].arg1, tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			reg[tabInstr[ip].arg1] -= reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"mul")) { //OK
 			printf("-> mul   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On inscrit dans le registre %d la multiplication des valeurs contenues dans les registres %d et %d, soient %d et %d.\n"
+				,tabInstr[ip].arg1, tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			reg[tabInstr[ip].arg1] *= reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"div")) {
 			printf("-> div   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On inscrit dans le registre %d la division des valeurs contenues dans les registres %d et %d, soient %d et %d.\n"
+				,tabInstr[ip].arg1, tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			if ( reg[tabInstr[ip].arg2] != 0 ) reg[tabInstr[ip].arg1] /= reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"cop") ) { //OK
 			printf("-> cop   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("On copie dans le registre %d la valeur contenue dans le registre %d, soit %d.\n"
+				,tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg2]);
 			reg[tabInstr[ip].arg1] = reg[tabInstr[ip].arg2];
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"equ")) { //OK
@@ -159,7 +169,8 @@ void interpreter() {
 			ip++;
 		} else if ((!strcmp(tabInstr[ip].instr,"print"))) { //OK
 			printf("-> print détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
-			printf("print > %d\n", tabInstr[ip].arg1);
+			printf("On affiche à l'écran le contenu du registre %d.\n", tabInstr[ip].arg1);
+			printf("print > %d\n", reg[tabInstr[ip].arg1]);
 			ip++;
 		} else {
 			printf("ERREUR INSTRUCTION INCONNUE, ip=%d, arg1=%d, arg2=%d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);

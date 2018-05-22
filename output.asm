@@ -4,7 +4,7 @@ load 0 1
 store 0 0
 load 0 0
 store 0 1
-print 1 0
+print 0 0
 afc 0 5
 store 0 1
 afc 0 2
@@ -17,4 +17,4 @@ load 0 1
 store 0 0
 load 0 0
 store 0 1
-print 1 0
+print 0 0
