@@ -105,7 +105,7 @@ instr:
 
 bloc_while_action:
 	{		
-		addInstr("load", getIndice()-1,9);
+		addInstr("load", getIndice()-1, 9);
 		addInstr("jmpc", getIndice(), 9); 
 		decrementerIndice();
 		$$ = getIndiceInstr() -1;
@@ -272,8 +272,8 @@ operation : operation tPLUS operation {
 
 calcul: tNOM tEGAL operation tFIN_INSTRUCTION {
 		int a = getAdresse($1);
-		addInstr("load", 0, getIndice() - 1);
-		addInstr("store", 0, a);
+		addInstr("load", getIndice() - 1, 0);
+		addInstr("store", a, 0);
 		decrementerIndice(); } ;
 
 %%

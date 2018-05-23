@@ -68,7 +68,12 @@ void interpreter() {
 			printf("\033[0;36m[Interpréteur]\033[0m -> div   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printf("\033[0;36m[Interpréteur]\033[0m On inscrit dans le registre %d la division des valeurs contenues dans les registres %d et %d, soient %d et %d.\n"
 				,tabInstr[ip].arg1, tabInstr[ip].arg1, tabInstr[ip].arg2, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
-			reg[tabInstr[ip].arg1] = reg[tabInstr[ip].arg1]/reg[tabInstr[ip].arg2];
+			if (reg[tabInstr[ip].arg2] != 0) {
+				reg[tabInstr[ip].arg1] = reg[tabInstr[ip].arg1]/reg[tabInstr[ip].arg2];
+			} else {
+				printf("\033[0;36m[Interpréteur]\033[0m \033[0;31mERREUR DIVISION PAR ZERO.\033[0m \n");
+				exit(1);
+			}
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"cop") ) { //OK
 			printf("\033[0;36m[Interpréteur]\033[0m -> cop   détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
@@ -169,11 +174,12 @@ void interpreter() {
 			ip++;
 		} else if ((!strcmp(tabInstr[ip].instr,"print"))) { //OK
 			printf("\033[0;36m[Interpréteur]\033[0m -> print détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
-			printf("\033[0;36m[Interpréteur]\033[0m On affiche à l'écran le contenu du registre %d.\n", tabInstr[ip].arg1);
-			printf("\033[0;33m> %d\033[0m\n", reg[tabInstr[ip].arg1]);
+			printf("\033[0;36m[Interpréteur]\033[0m On affiche à l'écran %d, le contenu de la mémoire à l'adresse %d.\n", 
+				memoireDonnees[tabInstr[ip].arg1], tabInstr[ip].arg1);
+			printf("\033[0;33m> %d\033[0m\n", memoireDonnees[tabInstr[ip].arg1]);
 			ip++;
 		} else {
-			printf("\033[0;36m[Interpréteur]\033[0m ERREUR INSTRUCTION INCONNUE, ip=%d, arg1=%d, arg2=%d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
+			printf("\033[0;36m[Interpréteur]\033[0m \033[0;31mERREUR INSTRUCTION INCONNUE, ip=%d, arg1=%d, arg2=%d\033[0m\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printRegistres();
 			ip++;
 		}

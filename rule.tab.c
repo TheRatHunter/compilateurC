@@ -1365,7 +1365,7 @@ yyreduce:
   case 23:
 #line 107 "rule.y" /* yacc.c:1646  */
     {		
-		addInstr("load", getIndice()-1,9);
+		addInstr("load", getIndice()-1, 9);
 		addInstr("jmpc", getIndice(), 9); 
 		decrementerIndice();
 		(yyval.nb) = getIndiceInstr() -1;
@@ -1587,8 +1587,8 @@ yyreduce:
 #line 273 "rule.y" /* yacc.c:1646  */
     {
 		int a = getAdresse((yyvsp[-3].str));
-		addInstr("load", 0, getIndice() - 1);
-		addInstr("store", 0, a);
+		addInstr("load", getIndice() - 1, 0);
+		addInstr("store", a, 0);
 		decrementerIndice(); }
 #line 1594 "rule.tab.c" /* yacc.c:1646  */
     break;

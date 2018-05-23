@@ -52,7 +52,7 @@ void afficherTableSymboles() {
 
 int getAdresse(char *s) {
 	for (int i=indiceCourant - 1; i >= 0 ; i--) {
-		if (strcmp(s, tab[i].id) == 0) {
+		if (!strcmp(s, tab[i].id)) {
 			return i;
 		}
 	}
