@@ -105,7 +105,7 @@ instr:
 
 bloc_while_action:
 	{		
-		addInstr("load", 9, getIndice()-1);
+		addInstr("load", getIndice()-1,9);
 		addInstr("jmpc", getIndice(), 9); 
 		decrementerIndice();
 		$$ = getIndiceInstr() -1;
@@ -129,7 +129,7 @@ body_while : tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE
 
 bloc_if_action:
 	{		
-		addInstr("load", 9, getIndice()-1);
+		addInstr("load", getIndice()-1, 9);
 		addInstr("jmpc", -1, 9); 
 		decrementerIndice();
 		$$ = getIndiceInstr() -1;} ;
@@ -183,8 +183,8 @@ valeurs_suite: tVIRGULE operation valeurs_suite
 
 valeur_ar: tNOM
 		  {
-		  addInstr("load", 0,getAdresse($1));
-		  addInstr("store",  ajouterTmp("int"), 0);}
+		  addInstr("load", getAdresse($1), 0);
+		  addInstr("store", ajouterTmp("int"), 0);}
 		| tNOMBRE 
 		  {
 		  addInstr("afc", 0, $1);
@@ -201,70 +201,70 @@ operation : operation tPLUS operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("add", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tMOINS operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("sub", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tFOIS operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("mul", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tDIVISE operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("div", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tDOUBLE_EGAL operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("equ", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tDIFFERENT operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("nequ", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tINFERIEUR operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("inf", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tINFERIEUR_EGAL operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("infe", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tSUPERIEUR operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("sup", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| operation tSUPERIEUR_EGAL operation {
 				addInstr("load", getIndice()-1, 1);
 				addInstr("load", getIndice()-2, 0);
 				addInstr("supe", 0, 1);
-				addInstr("store", 0, getIndice()-2);
+				addInstr("store", getIndice()-2, 0);
 				decrementerIndice();
 				}
 			| tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE

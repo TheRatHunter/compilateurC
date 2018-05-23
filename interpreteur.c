@@ -81,11 +81,11 @@ void interpreter() {
 			if (reg[tabInstr[ip].arg1]==reg[tabInstr[ip].arg2]) {
 				reg[tabInstr[ip].arg1] = 1;
 				printf("\033[0;36m[Interpréteur]\033[0m On inscrit 1 dans le registre %d car %d est égal à %d.\n", 
-					tabInstr[ip].arg1, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg1]);
+					tabInstr[ip].arg1, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			} else {
 				reg[tabInstr[ip].arg1] = 0;
 				printf("\033[0;36m[Interpréteur]\033[0m On inscrit 0 dans le registre %d car %d est différent de %d.\n", 
-					tabInstr[ip].arg1, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg1]);
+					tabInstr[ip].arg1, reg[tabInstr[ip].arg1], reg[tabInstr[ip].arg2]);
 			}
 			ip++;
 		} else if (!strcmp(tabInstr[ip].instr,"nequ")) { //OK
@@ -170,7 +170,7 @@ void interpreter() {
 		} else if ((!strcmp(tabInstr[ip].instr,"print"))) { //OK
 			printf("\033[0;36m[Interpréteur]\033[0m -> print détecté, ip =%3d , arg1 =%3d , arg2 =%3d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
 			printf("\033[0;36m[Interpréteur]\033[0m On affiche à l'écran le contenu du registre %d.\n", tabInstr[ip].arg1);
-			printf("> %d\n", reg[tabInstr[ip].arg1]);
+			printf("\033[0;33m> %d\033[0m\n", reg[tabInstr[ip].arg1]);
 			ip++;
 		} else {
 			printf("\033[0;36m[Interpréteur]\033[0m ERREUR INSTRUCTION INCONNUE, ip=%d, arg1=%d, arg2=%d\n", ip, tabInstr[ip].arg1, tabInstr[ip].arg2);
