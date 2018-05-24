@@ -15,22 +15,36 @@ int main() {
 	printf(i);
 	i = i - 4;
 	printf(i);
+	int u;
 	if (1==1) {
-		printf(22);
+		u = 22;
 	}
 	if (1==2) {
-		printf(33);
+		u = 33;
 	}
+	printf(u);
 
 	if(1<2) {
-		printf(44);
+		u = 44;
 	} else {
-		printf(55);
+		u = 55;
 	}
+	printf(u);
 
 	if(1>2) {
-		printf(77);
+		u = 77;
 	} else {
-		printf(66);
+		u = 66;
 	}
+	printf(u);
+
+	int k = 3;
+	printf(k);
+	while (k<=5) {
+		k = k+1;
+		printf(k);
+	}
+
+
+
 }	
