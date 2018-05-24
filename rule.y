@@ -165,7 +165,12 @@ printf : tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRU
 
 decl: type tNOM {ajouter($2, type, 0, 1);} decl_affect ;
 
-decl_affect : | tEGAL valeur_ar { decrementerIndice(); } ;
+decl_affect : | tEGAL valeur_ar { 
+	addInstr("load", getIndice()-1, 0);
+	decrementerIndice(); 
+	//On récupère la valeur et on l'inscrit au bon endroit dans la mémoire
+	addInstr("store", getIndice()-1, 0);
+	 } ;
 
 declaration_variables:
 	decl declaration_variables_suite tFIN_INSTRUCTION;

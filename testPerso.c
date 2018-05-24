@@ -3,6 +3,8 @@ int main() {
 	i = 3 ;
 	printf(5);
 	printf(i);
+	int j = 8;
+	printf(j);
 	i = 5 + 2;
 	printf(i);
 	i = i + 13;
