@@ -125,7 +125,7 @@ afc 0 44
 store 3 0
 load 3 0
 store 2 0
-jmp 132 666
+jmp 132 222
 afc 0 55
 store 3 0
 load 3 0
@@ -147,7 +147,7 @@ afc 0 77
 store 3 0
 load 3 0
 store 2 0
-jmp 154 666
+jmp 154 222
 afc 0 66
 store 3 0
 load 3 0
@@ -185,7 +185,7 @@ store 3 0
 load 3 0
 store 4 0
 print 4 0
-jmp 164 666
+jmp 164 222
 load 3 0
 store 5 0
 load 0 0

@@ -1391,7 +1391,7 @@ yyreduce:
 
   case 25:
 #line 121 "rule.y" /* yacc.c:1646  */
-    { patchInstr((yyvsp[-1].nb), getIndiceInstr()+1); addInstr("jmp", (yyvsp[-4].nb) ,666);}
+    { patchInstr((yyvsp[-1].nb), getIndiceInstr()+1); addInstr("jmp", (yyvsp[-4].nb) ,222);}
 #line 1396 "rule.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1407,7 +1407,7 @@ yyreduce:
 
   case 29:
 #line 141 "rule.y" /* yacc.c:1646  */
-    { addInstr("jmp", -1, 666 ); 
+    { addInstr("jmp", -1, 222 ); 
 	  (yyval.nb) = getIndiceInstr() -1;}
 #line 1413 "rule.tab.c" /* yacc.c:1646  */
     break;
@@ -1856,4 +1856,5 @@ int main(){
 	displayInstructions();
 	printf("Ecriture du code assembleur dans le fichier output.asm...\n");
 	genererAsm("output.asm");
+	genererCodeHexa("outputHexa.asm");
 } 

@@ -15,4 +15,6 @@ void patchInstr(int indOrig, int indDest);
 
 void displayInstructions();
 
-void genererAsm();
+void genererAsm(char* filename);
+
+void genererCodeHexa(char* filename);

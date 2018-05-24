@@ -60,3 +60,51 @@ void genererAsm(char* filename)
     else
         perror("hello.txt");
 }
+
+void genererCodeHexa(char* filename)
+{
+    FILE * f;
+
+    f = fopen(filename, "w");
+    if (f != NULL)
+    {
+		for (int i=0; i < indiceInstruction ; i++) {
+			//if (tabInstr[i].instr)
+			if ( !strcmp(tabInstr[i].instr,"add") ) {
+				fprintf(f, "01%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"mul") ) {
+				fprintf(f, "02%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"sub") ) {
+				fprintf(f, "03%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"div") ) {
+				fprintf(f, "04%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"print") ) {
+				fprintf(f, "05%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"afc") ) {
+				fprintf(f, "06%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"load") ) {
+				fprintf(f, "07%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"store") ) {
+				fprintf(f, "08%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"equ") ) {
+				fprintf(f, "09%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"inf") ) {
+				fprintf(f, "0a%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"infe") ) {
+				fprintf(f, "0b%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"sup") ) {
+				fprintf(f, "0c%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"supe") ) {
+				fprintf(f, "0d%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"jmp") ) {
+				fprintf(f, "0e%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else if ( !strcmp(tabInstr[i].instr,"jmpc") ) {
+				fprintf(f, "0f%.2x%.2x\n", tabInstr[i].arg1, tabInstr[i].arg2);
+			} else {}			
+			
+		}
+        fclose(f);
+    }
+    else
+        perror("hello.txt");
+}

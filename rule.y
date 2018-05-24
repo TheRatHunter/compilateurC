@@ -118,7 +118,7 @@ memo_instr:
 
 
 bloc_while : tWHILE tPARENTHESE_OUVRANTE memo_instr operation tPARENTHESE_FERMANTE bloc_while_action body_while
-		  		{ patchInstr($6, getIndiceInstr()+1); addInstr("jmp", $3 ,666);};
+		  		{ patchInstr($6, getIndiceInstr()+1); addInstr("jmp", $3 ,222);};
 
 body_while : tACCOLADE_OUVRANTE instrs tACCOLADE_FERMANTE 
 		 | instr tFIN_INSTRUCTION;
@@ -138,7 +138,7 @@ bloc_if_action:
 // Si IF est vrai, on fait les instructions puis on saute le ELSE
 
 bloc_else_action:
-	{ addInstr("jmp", -1, 666 ); 
+	{ addInstr("jmp", -1, 222 ); 
 	  $$ = getIndiceInstr() -1;} ;
 
 bloc_if : tIF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE bloc_if_action body_if
@@ -301,4 +301,5 @@ int main(){
 	displayInstructions();
 	printf("Ecriture du code assembleur dans le fichier output.asm...\n");
 	genererAsm("output.asm");
+	genererCodeHexa("outputHexa.asm");
 } 
