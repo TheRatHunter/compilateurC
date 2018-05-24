@@ -1424,7 +1424,7 @@ yyreduce:
 
   case 36:
 #line 164 "rule.y" /* yacc.c:1646  */
-    { addInstr("print", getIndice()-2, 0); decrementerIndice(); }
+    { addInstr("print", getIndice()-1, 0); decrementerIndice(); }
 #line 1429 "rule.tab.c" /* yacc.c:1646  */
     break;
 

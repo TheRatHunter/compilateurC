@@ -14,15 +14,21 @@ int main() {
 	i = i - 4;
 	printf(i);
 	if (1==1) {
-		printf(88);
+		printf(22);
 	}
 	if (1==2) {
-		printf(99);
+		printf(33);
 	}
 
 	if(1<2) {
 		printf(44);
 	} else {
 		printf(55);
+	}
+
+	if(1>2) {
+		printf(77);
+	} else {
+		printf(66);
 	}
 }	
