@@ -16,12 +16,15 @@ interpreter: interpreteur.c
 testI: interpreter
 	./interpreteur output.asm
 tests: compiler interpreter
+	#Doit afficher dans l'ordre : 3 4 8 35 35 3 4 5
 	./compiler<test.c
 	./interpreteur output.asm
 tests2: compiler interpreter
+	#Doit afficher 3 puis 35
 	./compiler<test2.c
 	./interpreteur output.asm
 tests3: compiler interpreter
+	#Doit afficher dans l'ordre : 5 3 8 7 20 40 20 16 22 44 66 3 4 5 6
 	cat testPerso.c
 	./compiler<testPerso.c
 	./interpreteur output.asm
