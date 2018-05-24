@@ -45,6 +45,8 @@ int main() {
 		printf(k);
 	}
 
+	int w=k*i+ 3;
+	printf(w);
 
 
 }	

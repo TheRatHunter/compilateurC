@@ -24,7 +24,7 @@ tests2: compiler interpreter
 	./compiler<test2.c
 	./interpreteur output.asm
 tests3: compiler interpreter
-	#Doit afficher dans l'ordre : 5 3 8 7 20 40 20 16 22 44 66 3 4 5 6
+	#Doit afficher dans l'ordre : 5 3 8 7 20 40 20 16 22 44 66 3 4 5 6 99
 	cat testPerso.c
 	./compiler<testPerso.c
 	./interpreteur output.asm

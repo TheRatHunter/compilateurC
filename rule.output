@@ -74,7 +74,7 @@ Grammaire
    37 decl: type tNOM $@2 decl_affect
 
    38 decl_affect: %empty
-   39            | tEGAL valeur_ar
+   39            | tEGAL operation
 
    40 declaration_variables: decl declaration_variables_suite tFIN_INSTRUCTION
 
@@ -211,10 +211,10 @@ valeurs (64)
 valeurs_suite (65)
     à gauche: 46 47, à droite: 44 46
 valeur_ar (66)
-    à gauche: 48 49 50, à droite: 39 62
+    à gauche: 48 49 50, à droite: 62
 operation (67)
     à gauche: 51 52 53 54 55 56 57 58 59 60 61 62, à droite: 24 29
-    31 35 44 46 51 52 53 54 55 56 57 58 59 60 61 63
+    31 35 39 44 46 51 52 53 54 55 56 57 58 59 60 61 63
 calcul (68)
     à gauche: 63, à droite: 18
 
@@ -1106,13 +1106,15 @@ calcul (68)
 
 État 79
 
-   39 decl_affect: tEGAL . valeur_ar
+   39 decl_affect: tEGAL . operation
 
-    tNOM     décalage et aller à l'état 48
-    tNOMBRE  décalage et aller à l'état 49
+    tPARENTHESE_OUVRANTE  décalage et aller à l'état 47
+    tNOM                  décalage et aller à l'état 48
+    tNOMBRE               décalage et aller à l'état 49
 
     appel_fonction  aller à l'état 50
-    valeur_ar       aller à l'état 98
+    valeur_ar       aller à l'état 51
+    operation       aller à l'état 98
 
 
 État 80
@@ -1428,7 +1430,28 @@ calcul (68)
 
 État 98
 
-   39 decl_affect: tEGAL valeur_ar .
+   39 decl_affect: tEGAL operation .
+   51 operation: operation . tPLUS operation
+   52          | operation . tMOINS operation
+   53          | operation . tFOIS operation
+   54          | operation . tDIVISE operation
+   55          | operation . tDOUBLE_EGAL operation
+   56          | operation . tDIFFERENT operation
+   57          | operation . tINFERIEUR operation
+   58          | operation . tINFERIEUR_EGAL operation
+   59          | operation . tSUPERIEUR operation
+   60          | operation . tSUPERIEUR_EGAL operation
+
+    tPLUS            décalage et aller à l'état 62
+    tMOINS           décalage et aller à l'état 63
+    tFOIS            décalage et aller à l'état 64
+    tDIVISE          décalage et aller à l'état 65
+    tDOUBLE_EGAL     décalage et aller à l'état 67
+    tDIFFERENT       décalage et aller à l'état 68
+    tINFERIEUR       décalage et aller à l'état 69
+    tINFERIEUR_EGAL  décalage et aller à l'état 70
+    tSUPERIEUR       décalage et aller à l'état 71
+    tSUPERIEUR_EGAL  décalage et aller à l'état 72
 
     $défaut  réduction par utilisation de la règle 39 (decl_affect)
 

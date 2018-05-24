@@ -165,7 +165,7 @@ printf : tPRINTF tPARENTHESE_OUVRANTE operation tPARENTHESE_FERMANTE tFIN_INSTRU
 
 decl: type tNOM {ajouter($2, type, 0, 1);} decl_affect ;
 
-decl_affect : | tEGAL valeur_ar { 
+decl_affect : | tEGAL operation { 
 	addInstr("load", getIndice()-1, 0);
 	decrementerIndice(); 
 	//On récupère la valeur et on l'inscrit au bon endroit dans la mémoire
