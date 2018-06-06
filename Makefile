@@ -28,3 +28,8 @@ tests3: compiler interpreter
 	cat testPerso.c
 	./compiler<testPerso.c
 	./interpreteur output.asm
+etape1: compiler
+	./compiler<testPerso.c
+etape2: interpreter
+	./interpreteur output.asm
+
