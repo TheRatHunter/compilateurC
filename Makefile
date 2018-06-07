@@ -31,5 +31,6 @@ tests3: compiler interpreter
 etape1: compiler
 	./compiler<testPerso.c
 etape2: interpreter
+	#Doit afficher dans l'ordre : 5 3 8 7 20 40 20 16 22 44 66 3 4 5 6 99
 	./interpreteur output.asm
 
